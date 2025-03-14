@@ -21,12 +21,15 @@ packer build ansible-web.pkr.hcl
 
 
 
-Instead of directly creating an EC2 instance, I use the module in the configuration.
+Instead of directly creating an EC2 instance, I use the above files in the module.
 
 #### **Key Changes:**
 - **Removed** `aws_instance "web"` from `main.tf`
-- **Created a module** in `terraform/modules/web-server/`
-- **Updated `main.tf`** to use the module:
+- **Created a module** in `terraform/modules/web-server/` with also creating three files of the variables.tf outputs.tf main.tf
+- please look into my three files in my repo to verify the contents 
+- **Updated `main.tf`** to use the three files under the module:
+- **Updated `main.tf`** in the root module to use the web-server module:
+
 ```hcl
 module "web-server" {
   source                  = "./modules/web-server"
@@ -55,11 +58,7 @@ terraform validate
 ```bash
 terraform apply
 ```
-_(Typed `yes` to confirm the changes.)_
-#### **📸 Screenshot to Capture:**  
-- Terraform **successfully creating the EC2 instance**.
 
----
 
 
 Once Terraform completed, I verified that the EC2 instance was running.
@@ -70,25 +69,18 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=Web"
 ```
 
 
-### **✅ Step 8: Cleaning Up Resources**
+
 After completing the lab, I destroyed all AWS resources.
 
 #### **Command:**
 ```bash
 terraform destroy
 ```
-_(Typed `yes` to confirm deletion.)_
 
-Additionally, I removed:
-```bash
-aws ec2 deregister-image --image-id ami-XXXXXXX
-aws ec2 delete-snapshot --snapshot-id snap-XXXXXXX
+
 ./scripts/delete_lab_key
 ```
-#### **📸 Screenshot to Capture:**  
-- Terminal output showing **Terraform successfully destroyed resources**.
 
----
 
 
 
