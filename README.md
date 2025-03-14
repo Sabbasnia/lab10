@@ -1,7 +1,7 @@
+Sina Abbasnia A01377364
 
 
-
-Before launching packer, I needed to **import an SSH public key** into AWS.
+first, I needed to **import an SSH public key** into AWS.
 
 #### **Command:**
 ```bash
@@ -21,7 +21,7 @@ packer build ansible-web.pkr.hcl
 
 
 
-Instead of directly creating an EC2 instance, I use the above files in the module.
+Instead of directly creating an EC2 instance, I use the three files in the modules directory variables.tf outputs.tf main.tf.
 
 #### **Key Changes:**
 - **Removed** `aws_instance "web"` from `main.tf`
