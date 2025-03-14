@@ -76,6 +76,7 @@ After completing the lab, I destroyed all AWS resources.
 ```bash
 terraform destroy
 ```
+```
 ./scripts/delete_lab_key
 ```
 
